@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const express = require('express');
-const router = express.Router();
+const Router = require("express").Router;
+const router = new Router();
 
 const User = require("../models/user");
 const { SECRET_KEY, DB_URI, BCRYPT_WORK_FACTOR } = require("../config");
