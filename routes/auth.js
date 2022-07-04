@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
-const Router = require("express").Router;
-const router = new Router();
+const express = require('express');
+const router = express.Router();
+
 const User = require("../models/user");
 const { SECRET_KEY, DB_URI, BCRYPT_WORK_FACTOR } = require("../config");
 const ExpressError = require("../expressError");
@@ -60,3 +61,23 @@ const results = await DB_URI.query(`
  *
  *  Make sure to update their last-login!
  */
+
+
+router.post('/register' , async function(req,res,next){
+    try {
+        let { username } = await User.register(req.body);
+        let token = jwt.sign({ username } , SECRET_KEY);
+        User.updateLoginTimestamp(username);
+        return res.json({token});
+    } catch (err) {
+        return next(err);
+    }
+
+});
+
+
+// tried in insomnia why cannot register a user?
+   
+
+
+module.exports = router;

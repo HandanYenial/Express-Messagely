@@ -1,7 +1,7 @@
 /** User class for message.ly */
 const db = require("../db");
 const bcrypt = require("bcrypt");
-const ExpressError = require("..expressError");
+const ExpressError = require("../expressError");
 
 const { BCRYPT_WORK_FACTOR } = require("../config"); //work factor: 12
 
