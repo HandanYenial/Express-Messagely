@@ -69,6 +69,7 @@ router.get("/:username/from" , async function(req,res,next){
     try{
         let messages = await User.messagesFrom(req.params.username);
         return res.json ({ messages });
+        // return render_template("messages.html", messages=messages);
         }
         catch (err) {
             return next(err);
