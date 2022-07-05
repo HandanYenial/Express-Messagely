@@ -9,10 +9,10 @@ const User = require("../models/user");
  * => {users: [{username, first_name, last_name, phone}, ...]}
  *
  **/
-router.get("/" , ensureLoggedIn , async function(req,res,next){
+router.get("/" , ensureLoggedIn , async function(req,res,next){ //ensureLoggedIn is a middleware function
     try{
-        const users = await User.all(); // we already have all in the user model
-        return res.json({users});
+        const users = await User.all(); // we already have all() method in the user model
+        return res.json({users}); //return all the users in the database
     } catch (err) {
         return next(err);
     }
@@ -45,7 +45,7 @@ router.get("/:username" , ensureCorrectUser , async function(req,res,next){ //si
  *
  **/
 
-router.get("/:username/to" , ensureCorrectUser, async function(req,res,next){
+router.get("/:username/to" , ensureCorrectUser, async function(req,res,next){ 
     try{
         let messages = await User.messagesTo(req.params.username);
         return res.json ({ messages });
@@ -65,7 +65,7 @@ router.get("/:username/to" , ensureCorrectUser, async function(req,res,next){
  *
  **/
 
-router.get("/:username/from" , async function(req,res,next){
+router.get("/:username/from" , async function(req,res,next){ //
     try{
         let messages = await User.messagesFrom(req.params.username);
         return res.json ({ messages });
