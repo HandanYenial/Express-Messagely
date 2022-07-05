@@ -65,10 +65,10 @@ const results = await DB_URI.query(`
 
 router.post('/register' , async function(req,res,next){
     try {
-        let { username } = await User.register(req.body);
-        let token = jwt.sign({ username } , SECRET_KEY);
-        User.updateLoginTimestamp(username);
-        return res.json({token});
+        let { username } = await User.register(req.body); //we are passing in the request body
+        let token = jwt.sign({ username } , SECRET_KEY); //we are signing the token with the secret key
+        User.updateLoginTimestamp(username); //we are updating the last login timestamp(from User class updateLoginTimestamp method)
+        return res.json({token}); // return the token
     } catch (err) {
         return next(err);
     }
@@ -76,8 +76,7 @@ router.post('/register' , async function(req,res,next){
 });
 
 
-// tried in insomnia why cannot register a user?
-   
+
 
 
 module.exports = router;
