@@ -1,12 +1,12 @@
 /** Message class for message.ly */
 
-const db = require("../db");
-const ExpressError = require("../expressError");
+const db = require("../db"); 
+const ExpressError = require("../expressError"); //we need to import this to use it in the next line
 
 
 /** Message on the site. */
 
-class Message {
+class Message { 
 
   /** register new message -- returns
    *    {id, from_username, to_username, body, sent_at}
@@ -19,7 +19,7 @@ class Message {
               to_username,
               body,
               sent_at)
-            VALUES ($1, $2, $3, current_timestamp)
+            VALUES ($1, $2, $3, current_timestamp) 
             RETURNING id, from_username, to_username, body, sent_at`,
         [from_username, to_username, body]);
 
@@ -28,7 +28,7 @@ class Message {
 
   /** Update read_at for message */
 
-  static async markRead(id) {
+  static async markRead(id) { //this is a method that updates the read_at column(to see when the message is read)
     const result = await db.query(
         `UPDATE messages
            SET read_at = current_timestamp
