@@ -20,10 +20,12 @@
        phone: "+14155550000",
      });
    });
+ });
+ 
 
 //   /** POST /auth/register => token  */
 
-   describe("POST /auth/register", function () {
+  describe("POST /auth/register", function () {
      test("can register", async function () {
        let response = await request(app)
          .post("/auth/register")
@@ -57,7 +59,7 @@
          iat: expect.any(Number)
        });
      });
-
+    });
 //     test("won't login w/wrong password", async function () {
 //       let response = await request(app)
 //         .post("/auth/login")
@@ -74,6 +76,6 @@
 //   });
 // });
 
-// afterAll(async function () {
-//   await db.end();
-// });
+afterAll(async function () {
+   await db.end();
+});
